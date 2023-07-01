@@ -63,6 +63,24 @@ def signup(request):
 
     return render(request, 'signup.html')
 
+def addWatchList(request):
+    
+    if request.method == "POST":
+        return render(request, 'addWatchList.html',{
+            'films': Film.objects.filter(name__contains=request.POST['search'])
+        })
+
+    return render(request, 'addWatchList.html')
+
+def addToList(request, id):
+
+    p = PersonList(user_name=request.user.username, film=Film.objects.get(pk=id))
+    p.save()
+    return render(request, 'index.html', {
+        'list': PersonList.objects.filter(user_name=request.user.username)
+    })
+
+
 # this code snippit extracts data from csv file and save it into Db
 # from filmsDb.models import Film
 # import csv

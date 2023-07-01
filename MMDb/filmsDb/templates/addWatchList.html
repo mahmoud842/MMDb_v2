@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <form action="{% url 'addWatchList' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="search" placeholder="By Name">
+        <input type="submit" value="search">
+    </form>
+
+    <table>
+        {% for record in films %}
+        <tr>
+            <td><a href="{% url 'addToList' record.id %}">{{record.id}}</a></td>
+            <td>{{record.name}}</td>
+        </tr>
+        {% empty %}
+        <p>No Results</p>
+        {% endfor %}
+    </table>
+{% endblock %}
