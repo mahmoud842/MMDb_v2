@@ -58,6 +58,7 @@ def signup(request):
                                             password=request.POST["password"],
                                             first_name=request.POST['first_name'])
             user.save()
+            login(request,user)
         
         return HttpResponseRedirect(reverse("index"))
 
