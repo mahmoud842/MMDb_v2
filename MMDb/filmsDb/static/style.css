@@ -1,0 +1,16 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+}
+
+body {
+    font-size: 18px;
+    background-color: #6CB4EE;
+}
+
+.a-btn {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+}

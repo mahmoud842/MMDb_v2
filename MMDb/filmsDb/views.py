@@ -81,6 +81,27 @@ def addToList(request, id):
         'list': PersonList.objects.filter(user_name=request.user.username)
     })
 
+def deleteUser(request):
+    if request.method == "POST":
+        return render(request, 'deleteUser.html', {
+            'users': User.objects.filter(username__contains=request.POST['search'])
+        })
+
+    return render(request, 'deleteUser.html')
+
+def deleteExecution(request, user_name):
+    user = User.objects.get(username=user_name) #altt then parameter
+    list = PersonList.objects.filter(user_name=user.username)
+    
+    for film in list:
+        film.delete()
+
+    user.delete()
+    return render(request, 'index.html', {
+        'list': PersonList.objects.filter(user_name=request.user.username),
+        'message': 'User deleted'
+    })
+
 
 # this code snippit extracts data from csv file and save it into Db
 # from filmsDb.models import Film
