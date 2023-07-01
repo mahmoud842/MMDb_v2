@@ -2,5 +2,12 @@
 
 {% block body %}
     <p>Hello, {{request.user.username}}</p>
+
+    <ul>
+        {% for record in list %}
+            <li>{{record.film.name}}</li>
+        {% endfor %}
+    </ul>
+
     <a href="{% url 'logout' %}">Log Out</a>
 {% endblock %}

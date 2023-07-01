@@ -17,3 +17,7 @@ class Film(models.Model):
 
     def __str__(self):
         return f"{self.id}: {self.name} , {self.language} , {self.rate}"
+    
+class PersonList(models.Model):
+    user_name = models.CharField(max_length=64)
+    film = models.ForeignKey(Film, on_delete=models.CASCADE)

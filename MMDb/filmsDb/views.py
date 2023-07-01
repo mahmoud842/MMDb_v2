@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Film
+from .models import Film, PersonList
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
@@ -11,7 +11,9 @@ def index(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("login"))
 
-    return render(request, 'index.html')
+    return render(request, 'index.html', {
+        'list': PersonList.objects.filter(user_name=request.user.username)
+    })
 
 def filmsList(request):
     films = Film.objects.all()
